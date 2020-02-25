@@ -3,4 +3,19 @@
 
 \begin{document}
 
+\title{Domeinanalyse van een bordspellendatabase}
+\date{\today}
+\maketitle
+
+We gaan een databasemodel geven voor een bordspellendatabase. In ons geval geval definiëren we bordspellen als alle spellen die worden gespeeld aan of rondom een tafel. Dus kaartspellen, trivia spellen en gewone bordspellen zoals mens erge je niet vallen onder onze definitie. Videospellen, buiten spellen (denk aan voetbal) en spellen waarvoor je geen hulpmiddelen nodig hebt (moet kopen) tellen niet mee. Denk bij deze laatste categorie aan spellen zoals 'steen, papier, schaar' en armpje drukken. \\
+
+Ten eerste heeft elk bordspel een titel, jaar van uitgave, minimum aantal spelers en maximum aantal spelers. Verder heeft een bordspel een uitgever, een minimum aanbevolen leeftijd, designers en artiesten. Er kunnen meerder publishers zijn voor een bepaald bordspel en ook meerdere designers en artiesten. \\
+
+Publishers hebben een naam en een lijst met de spellen die ze uitgeven. Ook hebben ze een jaar van oprichting.
+Designers hebben een naam, achternaam en een lijst van spellen waaraan ze hebben gewerkt. \\
+
+Spellen hebben ook meerder versies van dat spel. Zo is de Duitse versie van Scrabble anders dan de Nederlandse versie, maar het onderliggende spel Scrabble is hetzelfde. Wanneer de verschillende versies verschillend genoeg zijn om twee verschillende spellen te zijn is lastig. \\
+
+Bordspellen worden verkocht door verkopers voor een bepaalde prijs. Verkopers kunnen uiteraard meerder spellen (en versies van spellen) verkopen, maar verkopen één versie voor één prijs.
+
 \end{document}
