@@ -7,13 +7,12 @@
 \author{}
 \date{\today}
 \maketitle
-We gaan een databasemodel geven voor een bordspellendatabase.
+We gaan een model geven voor een bordspellendatabase.
 In ons geval geval defini\"{e}ren we bordspellen als alle spellen die worden gespeeld aan of rondom een
 tafel.
-Dus kaartspellen, trivia spellen en gewone bordspellen zoals 'mens erger je niet' vallen onder onze
+Dus kaartspellen, triviaspellen en gewone bordspellen zoals 'Mens erger je niet' vallen onder onze
 definitie.
-Videospellen, buiten spellen (denk aan voetbal) en spellen waarvoor je geen hulpmiddelen nodig hebt
-(moet kopen) tellen niet mee.
+Videospellen, buitenspellen (denk aan voetbal) en spellen waarvoor je geen hulpmiddelen hoeft te kopen tellen niet mee.
 Denk bij deze laatste categorie aan spellen zoals `steen, papier, schaar' en armpje drukken.
 
 Ten eerste heeft elk bordspel een titel, jaar van uitgave, minimum aantal spelers en maximum aantal
@@ -21,29 +20,31 @@ spelers.
 Verder heeft een bordspel een uitgever, een minimum aanbevolen leeftijd, ontwerpers en artiesten.
 Er kunnen meerder uitgevers zijn voor een bepaald bordspel en ook meerdere ontwerpers en artiesten.
 
-Publishers hebben een naam en een lijst met de spellen die ze uitgeven.
-Ook hebben ze een jaar van oprichting.
-Ontwerpers hebben een naam, achternaam en een lijst van spellen waaraan ze hebben gewerkt.
+Uitgevers (`publishers' in het ER-diagram) hebben een naam en een lijst met de spellen die ze uitgeven.
+Ontwerpers hebben een naam en een lijst van spellen waaraan ze hebben gewerkt.
 
-Spellen hebben ook meerder versies van dat spel.
+Er zijn ook meerdere versies van een bepaald spel.
 Zo is de Duitse versie van Scrabble anders dan de Nederlandse versie, maar het onderliggende spel
 Scrabble is hetzelfde.
 Een ander voorbeeld is bijvoorbeeld Monopoly.
 `Monopoly: van dam tot dom editie' is in essentie nog steeds Monopoly, maar wel een andere verie.
-Wanneer de verschillende versies verschillend genoeg zijn om twee verschillende spellen te zijn is
-lastig.
-Het gaat hierbij vooral om het verschil in de regels.
-Als er een significant verschil tussen de regels van de twee spellen, zijn het verschillende spellen.
+Wanneer twee versies verschillend genoeg zijn om twee verschillende spellen te zijn is lastig te bepalen.
+Het gaat hierbij vooral om het verschil in de regels en de inhoud.
+Als er een significant verschil tussen de regels en de inhoud van de twee versies, zijn het verschillende spellen.
+Versies hebben verder geen tot meerder talen.
+Denk hierbij aan spellen zoals schaken, die vaak worden geleverd zonder handleiding en dus geen taal hebben en spellen zoals `Uno' die uitleg geeft in verschillende talen in haar handleiding.
 
-Bordspellen worden verkocht door verkopers voor een bepaalde prijs.
+Bordspellen (lees versies) worden verkocht door verkopers voor een bepaalde prijs.
 Verkopers kunnen uiteraard meerdere spellen (en versies van spellen) verkopen, maar verkopen
 \'{e}\'{e}n versie voor \'{e}\'{e}n prijs.
 
-Verder hebben sommige spellen competities, dat wordt georganiseerd door \'{e}\'{e}n of meerder organisaties.
+Verder hebben sommige spellen competities, dat wordt georganiseerd door \'{e}\'{e}n of meerdere organisaties.
 Verder heeft een spel \'{e}\'{e}n of meerdere patenthouders.
 Er is echter wel een belangerijke restrictie.
 In \'{e}\'{e}n land is er slechts \'{e}\'{e}n patenthouder voor \'{e}\'{e}n spel.
 
 Ten slotte hebben spellen verkoopplekken, plekken waar je het spel kan kopen.
 We delen ze op in twee categori\"{e}en: fysieke en digitale verkoopplekken.
+Het onderscheid is simpel:
+Fysieke verkoopplekken hebben een fysiek adres terwijl digitale verkoopplekken slechts een website hebben.
 \end{document}
