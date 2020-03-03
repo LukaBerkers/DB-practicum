@@ -1,0 +1,19 @@
+* Relationeel schema:
+
+Game(gid, min-players, max-players, gname, min-age, year)
+Patent-Holder(phid, phname)
+Organization(oid, oname)
+Human(hid, hname)
+Publisher(pid, pname)
+Version(vid, gid, vname)
+Language(langname)
+Online-Seller(sid, sname, website)
+Offline-Seller(sid, sname, address)
+Patent(gid, phid, patent-country) FD: gid + patent-country = phid
+Sport(oid, gid)
+Job(gid, hid, job)
+Publish(pid, vid)
+Lang(langname, vid)
+Sell(sid, vid, price) (FD: sid + vid = price)
+
+TODO: Better names.
