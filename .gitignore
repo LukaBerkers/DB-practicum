@@ -1,3 +1,6 @@
+## Dia backup files
+*.dia~
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
