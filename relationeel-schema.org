@@ -17,3 +17,8 @@ Lang(langname, vid)
 Sell(sid, vid, price) (FD: sid + vid = price)
 
 TODO: Better names.
+
+Kan worden samengevoegd tot:
+Human(hid, hname, gid, job)
+
+// or not?

@@ -1,0 +1,24 @@
+CREATE TABLE Game (
+  gid  	     	  integer	  not null,
+  gname		  varchar(100)	  not null,	
+  year		  integer	  not null,
+  minplayers	  integer	  not null,
+  maxplayers	  integer	  not null,
+  minage	  integer	  not null); 
+
+INSERT INTO Game VALUES (0, 'Monopoly', 1933, 2, 8, 8);
+INSERT INTO Game VALUES (1, 'Scrabble', 1948, 2, 4, 10);
+INSERT INTO Game VALUES (2, 'Go', NULL, 2, 2, 8);
+INSERT INTO Game VALUES (3, 'Chess', 1475, 2, 2, 6);
+INSERT INTO Game VALUES (4, 'Battleship', 1931, 2, 2, 8);
+INSERT INTO Game VALUES (5, 'Catan', 1995, 3, 4, 10);
+INSERT INTO Game VALUES (6, 'The Werewolves of Miller's Hollow', 2001, 8, 18, 10);
+INSERT INTO Game VALUES (7, 'BANG!', 2002, 4, 7, 10);
+
+CREATE TABLE Human (
+  hid  	     	  integer	   not null
+  hname		  varchar(100)	   not null);
+
+CREATE TABLE Version (
+  vid  	     	  integer	   not null
+  vname		  varchar(100)	   not null);
