@@ -49,7 +49,7 @@ CREATE TABLE OfflineSeller (
     address     text            NOT NULL UNIQUE
 );
 
-CREATE TRIGGER PreventDuplicateSid
+CREATE TRIGGER PreventDuplicateSidInOnlineSeller
 BEFORE INSERT ON OnlineSeller
 BEGIN
     SELECT CASE
@@ -58,7 +58,7 @@ BEGIN
     END;
 END;
 
-CREATE TRIGGER PreventDuplicateSid
+CREATE TRIGGER PreventDuplicateSidInOfflineSeller
 BEFORE INSERT ON OfflineSeller
 BEGIN
     SELECT CASE
