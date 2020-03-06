@@ -1,5 +1,5 @@
 CREATE TABLE Game (
-    gid         integer         not null,
+    gid         integer         PRIMARY KEY,
     gname       varchar(100)    not null,
     year        integer         not null,
     minplayers  integer         not null,
@@ -8,71 +8,78 @@ CREATE TABLE Game (
 ); 
 
 CREATE TABLE PatentHolder (
-    phid        integer         not null,
+    phid        integer         PRIMARY KEY,
     phname      varchar(100)    not null
 );
 
 CREATE TABLE Organization (
-    oid         integer         not null,
-    oname       integer         not null);
+    oid         integer         PRIMARY KEY,
+    oname       integer         not null
+);
 
 CREATE TABLE Human (
-    hid         integer         not null,
+    hid         integer         PRIMARY KEY,
     hname       varchar(100)    not null
 );
 
 CREATE TABLE Publisher (
-    pid         integer         not null,
+    pid         integer         PRIMARY KEY,
     pname       varchar(100)    not null
 );
 
 CREATE TABLE Version (
-    vid         integer         not null,
+    vid         integer         PRIMARY KEY,
     vname       varchar(100)    not null
 );
 
 CREATE TABLE Language (
-    langname    varchar(2)      not null
+    langcode    char(2)         PRIMARY KEY,
+    langname    varchar(100)    not null UNIQUE
 );
 
 CREATE TABLE OnlineSeller (
-    sid         integer         not null,
+    sid         integer         PRIMARY KEY,
     sname       varchar(100)    not null,
-    website     varchar(100)    not null
+    website     varchar(100)    not null UNIQUE
 );
 
 CREATE TABLE OfflineSeller (
-    sid         integer         not null,
+    sid         integer         PRIMARY KEY,
     sname       varchar(100)    not null,
     address     varchar(100)    not null
 );
 
 CREATE TABLE Patent (
     gid         integer         not null,
-    phid        integer         not null,
-    country     varchar(100)    not null
+    phid        integer         REFERENCES PatentHolder(phid),
+    country     varchar(100), -- FD: country gid --> phid
+    PRIMARY KEY (country, phid)
 );
 
 CREATE TABLE Sport (
-    gid         integer         not null,
-    oid         integer         not null
+    gid         integer         REFERENCES Game(gid),
+    oid         integer         REFERENCES Organization(oid),
+    PRIMARY KEY (gid, oid)
 );
 
 CREATE TABLE Job  (
-    gid         integer         not null,
-    hid         integer         not null,
-    job         varchar(10)     not null
+    gid         integer         REFERENCES Game(gid),
+    hid         integer         REFERENCES Human(hid),
+    job         varchar(10),
+    PRIMARY KEY (gid, hid, job)
 );
 
 CREATE TABLE Lang (
-    langname    integer         not null,
-    vid         integer         not null
+    langname    integer         REFERENCES Language(langname),
+    vid         integer         REFERENCES Version(vid),
+    PRIMARY KEY (langname, vid)
 );
 
 CREATE TABLE Sells (
-    sid         integer         not null,
-    vid         integer         not null,
-    price       integer         not null
+    sid         integer -- Constraint: must be in either OfflineSellers or OnlineSellers
+    vid         integer,
+    price       integer,
+    PRIMARY KEY (sid, vid)
 );
 
 INSERT INTO Game VALUES (0, 'Monopoly', 1933, 2, 8, 8);
