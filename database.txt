@@ -1,66 +1,79 @@
 CREATE TABLE Game (
-  gid  	     	  integer	  not null,
-  gname		  varchar(100)	  not null,	
-  year		  integer	  not null,
-  minplayers	  integer	  not null,
-  maxplayers	  integer	  not null,
-  minage	  integer	  not null); 
+    gid         integer         not null,
+    gname       varchar(100)    not null,
+    year        integer         not null,
+    minplayers  integer         not null,
+    maxplayers  integer         not null,
+    minage      integer         not null
+); 
 
 CREATE TABLE PatentHolder (
-  phid 	     	  integer	  not null,
-  phname	  varchar(100)	  not null);
+    phid        integer         not null,
+    phname      varchar(100)    not null
+);
 
 CREATE TABLE Organization (
-  oid  	     	  integer	  not null,
-  oname		  integer	  not null);
+    oid         integer         not null,
+    oname       integer         not null);
 
 CREATE TABLE Human (
-  hid  	     	  integer	  not null,
-  hname		  varchar(100)	  not null);
+    hid         integer         not null,
+    hname       varchar(100)    not null
+);
 
 CREATE TABLE Publisher (
-  pid  	     	  integer	  not null,
-  pname		  varchar(100)	  not null);
+    pid         integer         not null,
+    pname       varchar(100)    not null
+);
 
 CREATE TABLE Version (
-  vid  	     	  integer	  not null,
-  vname		  varchar(100)	  not null);
+    vid         integer         not null,
+    vname       varchar(100)    not null
+);
 
 CREATE TABLE Language (
-  langname   	  varchar(2)	  not null);
+    langname    varchar(2)      not null
+);
 
 CREATE TABLE OnlineSeller (
-  sid  	          integer	  not null,
-  sname		  varchar(100)	  not null,
-  website	  varchar(100)	  not null);
+    sid         integer         not null,
+    sname       varchar(100)    not null,
+    website     varchar(100)    not null
+);
 
 CREATE TABLE OfflineSeller (
-  sid  	          integer	  not null,
-  sname		  varchar(100)	  not null,
-  address	  varchar(100)	  not null);
+    sid         integer         not null,
+    sname       varchar(100)    not null,
+    address     varchar(100)    not null
+);
 
 CREATE TABLE Patent (
-  gid  	     	  integer	  not null,
-  phid		  integer	  not null,
-  patentcountry   varchar(100)	  not null);
+    gid         integer         not null,
+    phid        integer         not null,
+    country     varchar(100)    not null
+);
 
 CREATE TABLE Sport (
-  oid  	     	  integer	  not null,
-  gid		  integer	  not null);
+    gid         integer         not null,
+    oid         integer         not null
+);
 
 CREATE TABLE Job  (
-  gid  	     	  integer	  not null,
-  hid		  integer	  not null,
-  job		  varchar(10)	  not null);
+    gid         integer         not null,
+    hid         integer         not null,
+    job         varchar(10)     not null
+);
 
 CREATE TABLE Lang (
-  langname   	  integer	  not null,
-  vid		  integer	  not null);
+    langname    integer         not null,
+    vid         integer         not null
+);
 
-CREATE TABLE Sell (
-  sid  	     	  integer	  not null,
-  vid		  integer	  not null,
-  price		  integer	  not null);
+CREATE TABLE Sells (
+    sid         integer         not null,
+    vid         integer         not null,
+    price       integer         not null
+);
 
 INSERT INTO Game VALUES (0, 'Monopoly', 1933, 2, 8, 8);
 INSERT INTO Game VALUES (1, 'Scrabble', 1948, 2, 4, 10);
@@ -70,15 +83,15 @@ INSERT INTO Game VALUES (4, 'Battleship', 1931, 2, 2, 8);
 INSERT INTO Game VALUES (5, 'Catan', 1995, 3, 4, 10);
 INSERT INTO Game VALUES (6, 'The Werewolves of Miller''s Hollow', 2001, 8, 18, 10);
 INSERT INTO Game VALUES (7, 'BANG!', 2002, 4, 7, 10);
-INSERT INTO Organization (0, 'European Go Federation');
-INSERT INTO Organization (1, 'American Go Association');
-INSERT INTO Organization (2, 'Nederlandse Go Bond');
-INSERT INTO Organization (3, 'All India Chess Federation');
-INSERT INTO Organization (4, 'All India Chess Federation for the Blind');
-INSERT INTO Organization (5, 'Japan Chess Association');
-INSERT INTO Sport (2, 0);
-INSERT INTO Sport (2, 1);
-INSERT INTO Sport (2, 2);
-INSERT INTO Sport (3, 3);
-INSERT INTO Sport (3, 4);
-INSERT INTO Sport (3, 5);
+INSERT INTO Organization VALUES (0, 'European Go Federation');
+INSERT INTO Organization VALUES (1, 'American Go Association');
+INSERT INTO Organization VALUES (2, 'Nederlandse Go Bond');
+INSERT INTO Organization VALUES (3, 'All India Chess Federation');
+INSERT INTO Organization VALUES (4, 'All India Chess Federation for the Blind');
+INSERT INTO Organization VALUES (5, 'Japan Chess Association');
+INSERT INTO Sport VALUES (2, 0);
+INSERT INTO Sport VALUES (2, 1);
+INSERT INTO Sport VALUES (2, 2);
+INSERT INTO Sport VALUES (3, 3);
+INSERT INTO Sport VALUES (3, 4);
+INSERT INTO Sport VALUES (3, 5);
