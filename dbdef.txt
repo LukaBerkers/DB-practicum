@@ -49,7 +49,7 @@ CREATE TABLE OfflineSeller (
     address     text            NOT NULL UNIQUE
 );
 
-CREATE TRIGGER PreventDuplicateSidInOnlineSeller
+CREATE TRIGGER PreventInsertSidOnline
 BEFORE INSERT ON OnlineSeller
 BEGIN
     SELECT CASE
@@ -58,8 +58,26 @@ BEGIN
     END;
 END;
 
-CREATE TRIGGER PreventDuplicateSidInOfflineSeller
+CREATE TRIGGER PreventUpdateSidOnline
+BEFORE UPDATE OF sid ON OnlineSeller
+BEGIN
+    SELECT CASE
+        WHEN NEW.sid IN (SELECT sid FROM OfflineSeller)
+        THEN RAISE(ABORT, 'sid already used in OfflineSeller')
+    END;
+END;
+
+CREATE TRIGGER PreventInsertSidOffline
 BEFORE INSERT ON OfflineSeller
+BEGIN
+    SELECT CASE
+        WHEN NEW.sid IN (SELECT sid FROM OnlineSeller)
+        THEN RAISE(ABORT, 'sid already used in OnlineSeller')
+    END;
+END;
+
+CREATE TRIGGER PreventUpdateSidOffline
+BEFORE UPDATE OF sid ON OfflineSeller
 BEGIN
     SELECT CASE
         WHEN NEW.sid IN (SELECT sid FROM OnlineSeller)
