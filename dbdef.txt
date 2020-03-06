@@ -50,10 +50,10 @@ CREATE TABLE OfflineSeller (
 );
 
 CREATE TABLE Patent (
-    gid         integer         NOT NULL,
-    phid        integer         REFERENCES PatentHolder(phid),
-    country     text, -- FD: country gid --> phid
-    PRIMARY KEY(country, phid)
+    gid         integer         REFERENCES Game(gid),
+    phid        integer         NOT NULL REFERENCES PatentHolder(phid),
+    country     text,               -- FD: country gid --> phid
+    PRIMARY KEY(country, gid)
 );
 
 CREATE TABLE Sport (
