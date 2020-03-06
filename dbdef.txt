@@ -1,56 +1,56 @@
 CREATE TABLE Game (
     gid         integer         PRIMARY KEY,
-    gname       varchar(100)    not null,
-    year        integer         not null,
-    minplayers  integer         not null,
-    maxplayers  integer         not null,
-    minage      integer         not null
+    gname       varchar(100)    NOT NULL,
+    year        integer         NOT NULL,
+    minplayers  integer         NOT NULL,
+    maxplayers  integer         NOT NULL,
+    minage      integer         NOT NULL
 ); 
 
 CREATE TABLE PatentHolder (
     phid        integer         PRIMARY KEY,
-    phname      varchar(100)    not null
+    phname      varchar(100)    NOT NULL
 );
 
 CREATE TABLE Organization (
     oid         integer         PRIMARY KEY,
-    oname       integer         not null
+    oname       integer         NOT NULL
 );
 
 CREATE TABLE Human (
     hid         integer         PRIMARY KEY,
-    hname       varchar(100)    not null
+    hname       varchar(100)    NOT NULL
 );
 
 CREATE TABLE Publisher (
     pid         integer         PRIMARY KEY,
-    pname       varchar(100)    not null
+    pname       varchar(100)    NOT NULL
 );
 
 CREATE TABLE Version (
     vid         integer         PRIMARY KEY,
-    vname       varchar(100)    not null
+    vname       varchar(100)    NOT NULL
 );
 
 CREATE TABLE Language (
     langcode    char(2)         PRIMARY KEY,
-    langname    varchar(100)    not null UNIQUE
+    langname    varchar(100)    NOT NULL UNIQUE
 );
 
 CREATE TABLE OnlineSeller (
     sid         integer         PRIMARY KEY,
-    sname       varchar(100)    not null,
-    website     varchar(100)    not null UNIQUE
+    sname       varchar(100)    NOT NULL,
+    website     varchar(100)    NOT NULL UNIQUE
 );
 
 CREATE TABLE OfflineSeller (
     sid         integer         PRIMARY KEY,
-    sname       varchar(100)    not null,
-    address     varchar(100)    not null
+    sname       varchar(100)    NOT NULL,
+    address     varchar(100)    NOT NULL
 );
 
 CREATE TABLE Patent (
-    gid         integer         not null,
+    gid         integer         NOT NULL,
     phid        integer         REFERENCES PatentHolder(phid),
     country     varchar(100), -- FD: country gid --> phid
     PRIMARY KEY (country, phid)
