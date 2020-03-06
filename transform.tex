@@ -1,0 +1,27 @@
+\documentclass[a4paper, dutch, parskip=full]{scrartcl}
+\usepackage[dutch]{babel}
+
+\begin{document}
+
+\title{Postnormalisatie}
+\author{Luuk Berkers & Nathan van den Berg}
+\date{\today}
+\maketitle
+Bij het normaliseringsproces merkten we slechts 4 FDs op.
+Gegeven een land en een spel dan is er \'{e}\'{e}n unieke patenthouder.
+Verder wordt de prijs van een versie van een spel volledig bepaald door de verkoper en die versie zelf.
+Het is immers niet logisch om twee dezelfde producten in \'{e}\'{e}n winkel voor twee verschillende prijzen te verkopen.
+In beide gevallen zijn deze tabellen al in de verst gereduceerde vorm, dus opsplitsen bleek niet nodig.
+Voor de winkels geldt dat adress een ander key is voor een offline winkel en een website url is een andere key voor een webshop (naast de gegeven key: `sid').
+Maar omdat url's en adressen uniek zijn, zijn ze superkeys, dus de twee tabellen zijn in BCNF.
+Omdat er verder geen niet-triviale FDs zijn is het relationele schema in BCNF.
+We zien ook dat het schema DP zijn. \\
+
+Verder zijn er nog kleine aanpassingen gemaakt aan de directe conversie van ER diagram naar een relationeel schema.
+Zo hebben we een 'Job' tabel togevoegd in plaats van twee `Art' en `Design' tabellen.
+Dit hebben we gedaan, omdat we zo een tabel uitsparen en het qua redundancy niet veel uitmaakt.
+Ook kunnen we later het aantal banen vrij makkelijk uitbreiden.
+De ISA structuur aan het linkerkant van het diagram, hebben we versimpeld tot twee tabellen: `OnlineWebshop' en `OfflineWebshop'.
+Hierbij hebben we geforceerd dat de id's van de winkels niet overlappen.
+Dit is handig voor queries later als we de tabellen willen verenigen.
+\end{document}
