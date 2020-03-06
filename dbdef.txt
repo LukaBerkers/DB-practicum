@@ -65,14 +65,14 @@ CREATE TABLE Sport (
 CREATE TABLE Job  (
     gid         integer         REFERENCES Game(gid),
     hid         integer         REFERENCES Human(hid),
-    job         varchar(10),
+    job         text            CHECK(job IN ('Art', 'Design')),
     PRIMARY KEY(gid, hid, job)
 );
 
 CREATE TABLE Lang (
-    langname    integer         REFERENCES Language(langname),
+    langcode    integer         REFERENCES Language(langcode),
     vid         integer         REFERENCES Version(vid),
-    PRIMARY KEY(langname, vid)
+    PRIMARY KEY(langcode, vid)
 );
 
 CREATE TABLE Sells (
