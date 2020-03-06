@@ -49,10 +49,28 @@ CREATE TABLE OfflineSeller (
     address     text            NOT NULL UNIQUE
 );
 
+CREATE TRIGGER PreventDuplicateSid
+BEFORE INSERT ON OnlineSeller
+BEGIN
+    SELECT CASE
+        WHEN NEW.sid IN (SELECT sid FROM OfflineSeller)
+        THEN RAISE(ABORT, 'sid already used in OfflineSeller')
+    END;
+END;
+
+CREATE TRIGGER PreventDuplicateSid
+BEFORE INSERT ON OfflineSeller
+BEGIN
+    SELECT CASE
+        WHEN NEW.sid IN (SELECT sid FROM OnlineSeller)
+        THEN RAISE(ABORT, 'sid already used in OnlineSeller')
+    END;
+END;
+
 CREATE TABLE Patent (
     gid         integer         REFERENCES Game(gid),
     phid        integer         NOT NULL REFERENCES PatentHolder(phid),
-    country     text,               -- FD: country gid --> phid
+    country     text,
     PRIMARY KEY(country, gid)
 );
 
@@ -64,7 +82,7 @@ CREATE TABLE Sport (
 
 CREATE TABLE Job (
     gid         integer         REFERENCES Game(gid),
-    hid         integer         REFERENCES Person(perid),
+    perid         integer         REFERENCES Person(perid),
     job         text            CHECK(job IN ('Art', 'Design')),
     PRIMARY KEY(gid, perid, job)
 );
