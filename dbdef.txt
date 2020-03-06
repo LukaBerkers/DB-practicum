@@ -17,13 +17,13 @@ CREATE TABLE Organization (
     oname       integer         NOT NULL
 );
 
-CREATE TABLE Human (
-    hid         integer         PRIMARY KEY,
+CREATE TABLE Person (
+    perid       integer         PRIMARY KEY,
     hname       text            NOT NULL
 );
 
 CREATE TABLE Publisher (
-    pid         integer         PRIMARY KEY,
+    pubid       integer         PRIMARY KEY,
     pname       text            NOT NULL
 );
 
@@ -62,20 +62,20 @@ CREATE TABLE Sport (
     PRIMARY KEY(gid, oid)
 );
 
-CREATE TABLE Job  (
+CREATE TABLE Job (
     gid         integer         REFERENCES Game(gid),
-    hid         integer         REFERENCES Human(hid),
+    hid         integer         REFERENCES Person(perid),
     job         text            CHECK(job IN ('Art', 'Design')),
-    PRIMARY KEY(gid, hid, job)
+    PRIMARY KEY(gid, perid, job)
 );
 
-CREATE TABLE Lang (
+CREATE TABLE InLanguage (
     langcode    integer         REFERENCES Language(langcode),
     vid         integer         REFERENCES Version(vid),
     PRIMARY KEY(langcode, vid)
 );
 
-CREATE TABLE Sells (
+CREATE TABLE Sale (
     sid         integer, -- Constraint: must be in either OfflineSellers or OnlineSellers
     vid         integer,
     price       integer,
