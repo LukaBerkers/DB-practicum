@@ -1,6 +1,6 @@
 CREATE TABLE Game (
     gid         integer         PRIMARY KEY,
-    gname       varchar(100)    NOT NULL,
+    gname       text            NOT NULL,
     year        integer         NOT NULL,
     minplayers  integer         NOT NULL,
     maxplayers  integer         NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE Game (
 
 CREATE TABLE PatentHolder (
     phid        integer         PRIMARY KEY,
-    phname      varchar(100)    NOT NULL
+    phname      text            NOT NULL
 );
 
 CREATE TABLE Organization (
@@ -19,40 +19,40 @@ CREATE TABLE Organization (
 
 CREATE TABLE Human (
     hid         integer         PRIMARY KEY,
-    hname       varchar(100)    NOT NULL
+    hname       text            NOT NULL
 );
 
 CREATE TABLE Publisher (
     pid         integer         PRIMARY KEY,
-    pname       varchar(100)    NOT NULL
+    pname       text            NOT NULL
 );
 
 CREATE TABLE Version (
     vid         integer         PRIMARY KEY,
-    vname       varchar(100)    NOT NULL
+    vname       text            NOT NULL
 );
 
 CREATE TABLE Language (
     langcode    char(2)         PRIMARY KEY,
-    langname    varchar(100)    NOT NULL UNIQUE
+    langname    text            NOT NULL UNIQUE
 );
 
 CREATE TABLE OnlineSeller (
     sid         integer         PRIMARY KEY,
-    sname       varchar(100)    NOT NULL,
-    website     varchar(100)    NOT NULL UNIQUE
+    sname       text            NOT NULL,
+    website     text            NOT NULL UNIQUE
 );
 
 CREATE TABLE OfflineSeller (
     sid         integer         PRIMARY KEY,
-    sname       varchar(100)    NOT NULL,
-    address     varchar(100)    NOT NULL
+    sname       text            NOT NULL,
+    address     text            NOT NULL
 );
 
 CREATE TABLE Patent (
     gid         integer         NOT NULL,
     phid        integer         REFERENCES PatentHolder(phid),
-    country     varchar(100), -- FD: country gid --> phid
+    country     text, -- FD: country gid --> phid
     PRIMARY KEY (country, phid)
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE Lang (
 );
 
 CREATE TABLE Sells (
-    sid         integer -- Constraint: must be in either OfflineSellers or OnlineSellers
+    sid         integer, -- Constraint: must be in either OfflineSellers or OnlineSellers
     vid         integer,
     price       integer,
     PRIMARY KEY (sid, vid)
