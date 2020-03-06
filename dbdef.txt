@@ -76,11 +76,25 @@ CREATE TABLE InLanguage (
 );
 
 CREATE TABLE Sale (
-    sid         integer, -- Constraint: must be in either OfflineSellers or OnlineSellers
-    vid         integer,
+    sid         integer,
+    vid         integer         REFERENCES Version(vid),
     price       integer,
     PRIMARY KEY(sid, vid)
 );
+
+-- Sadly, SQLite does not support ASSERTION statements
+--
+-- CREATE ASSERTION SellerIds CHECK(
+--     NOT EXISTS (
+--         SELECT sid
+--         FROM Sale
+--         WHERE sid <> ALL (
+--             SELECT sid FROM OnlineSeller
+--             UNION
+--             SELECT sid FROM OfflineSeller
+--         )
+--     )
+-- );
 
 INSERT INTO Game VALUES (0, 'Monopoly', 1933, 2, 8, 8);
 INSERT INTO Game VALUES (1, 'Scrabble', 1948, 2, 4, 10);
