@@ -46,7 +46,7 @@ CREATE TABLE OnlineSeller (
 CREATE TABLE OfflineSeller (
     sid         integer         PRIMARY KEY,
     sname       text            NOT NULL,
-    address     text            NOT NULL
+    address     text            NOT NULL UNIQUE
 );
 
 CREATE TABLE Patent (
