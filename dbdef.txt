@@ -82,7 +82,7 @@ CREATE TABLE Sport (
 
 CREATE TABLE Job (
     gid         integer         REFERENCES Game(gid),
-    perid         integer         REFERENCES Person(perid),
+    perid       integer         REFERENCES Person(perid),
     job         text            CHECK(job IN ('Art', 'Design')),
     PRIMARY KEY(gid, perid, job)
 );
