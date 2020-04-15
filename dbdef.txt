@@ -110,7 +110,7 @@ CREATE TABLE Job (
 );
 
 CREATE TABLE InLanguage (
-    langcode    integer         REFERENCES Language(langcode),
+    langcode    char(2)         REFERENCES Language(langcode),
     vid         integer         REFERENCES Version(vid),
     PRIMARY KEY(langcode, vid)
 );
