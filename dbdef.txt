@@ -37,7 +37,7 @@ CREATE TABLE Publisher (
 );
 
 CREATE TABLE Language (
-    langcode    char(2)         PRIMARY KEY,
+    langcode    integer         PRIMARY KEY,
     langname    text            NOT NULL UNIQUE
 );
 
@@ -110,7 +110,7 @@ CREATE TABLE Job (
 );
 
 CREATE TABLE InLanguage (
-    langcode    char(2)         REFERENCES Language(langcode),
+    langcode    integer         REFERENCES Language(langcode),
     vid         integer         REFERENCES Version(vid),
     PRIMARY KEY(langcode, vid)
 );
