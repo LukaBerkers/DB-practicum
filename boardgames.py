@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
+import random
 import requests
 import sys
 import time
 import xml.etree.ElementTree as ET
+
+random.seed()
 
 API = "https://www.boardgamegeek.com/xmlapi2/"
 
@@ -69,7 +72,9 @@ def add_game_data(item_id, expands):
     GID += 1
 
     global VID
-    versions = item.findall("./versions/item[@type='boardgameversion']")
+    all_versions = item.findall("./versions/item[@type='boardgameversion']")
+    k = random.randint(0, len(all_versions) - 1)
+    versions = [all_versions[0]] + random.sample(all_versions[1:], k)
     for version in versions:
         name = version.find("./name[@type='primary']").attrib["value"]
         add_statement(
@@ -120,7 +125,9 @@ def add_game_data(item_id, expands):
         else:
             ARTIST_GAMES[id].append(gid)
 
-    expansions = item.findall("./link[@type='boardgameexpansion']")
+    all_expansions = item.findall("./link[@type='boardgameexpansion']")
+    k = random.randint(0, len(all_expansions))
+    expansions = random.sample(all_expansions, k)
     inbound = item.findall("./link[@type='boardgameexpansion'][@inbound]")
     for expansion in expansions:
         if expansion not in inbound:
