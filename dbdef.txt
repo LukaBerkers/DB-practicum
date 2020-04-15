@@ -13,7 +13,8 @@ CREATE TABLE Game (
 
 CREATE TABLE Version (
     vid         integer         PRIMARY KEY,
-    vname       text            NOT NULL
+    vname       text            NOT NULL,
+    vof         integer         NOT NULL REFERENCES Game(gid)
 );    
 
 -- CREATE TABLE PatentHolder (
