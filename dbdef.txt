@@ -1,16 +1,25 @@
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE Game (
     gid         integer         PRIMARY KEY,
     gname       text            NOT NULL,
     year        integer         NOT NULL,
     minplayers  integer         NOT NULL CHECK(minplayers > 0),
     maxplayers  integer         NOT NULL CHECK(maxplayers >= minplayers),
-    minage      integer         NOT NULL CHECK(minage >= 0)
-); 
-
-CREATE TABLE PatentHolder (
-    phid        integer         PRIMARY KEY,
-    phname      text            NOT NULL
+    minage      integer         NOT NULL CHECK(minage >= 0),
+    rating      real            CHECK(rating >= 0 AND rating <= 10),
+    expands     integer         REFERENCES Game(gid)
 );
+
+CREATE TABLE Version (
+    vid         integer         PRIMARY KEY,
+    vname       text            NOT NULL
+);    
+
+-- CREATE TABLE PatentHolder (
+--     phid        integer         PRIMARY KEY,
+--     phname      text            NOT NULL
+-- );
 
 CREATE TABLE Organization (
     oid         integer         PRIMARY KEY,
@@ -25,11 +34,6 @@ CREATE TABLE Person (
 CREATE TABLE Publisher (
     pubid       integer         PRIMARY KEY,
     pname       text            NOT NULL
-);
-
-CREATE TABLE Version (
-    vid         integer         PRIMARY KEY,
-    vname       text            NOT NULL
 );
 
 CREATE TABLE Language (
@@ -85,12 +89,12 @@ BEGIN
     END;
 END;
 
-CREATE TABLE Patent (
-    gid         integer         REFERENCES Game(gid),
-    phid        integer         NOT NULL REFERENCES PatentHolder(phid),
-    country     text,
-    PRIMARY KEY(country, gid)
-);
+-- CREATE TABLE Patent (
+--     gid         integer         REFERENCES Game(gid),
+--     phid        integer         NOT NULL REFERENCES PatentHolder(phid),
+--     country     text,
+--     PRIMARY KEY(country, gid)
+-- );
 
 CREATE TABLE Sport (
     gid         integer         REFERENCES Game(gid),
@@ -117,6 +121,12 @@ CREATE TABLE Sale (
     price       integer,
     PRIMARY KEY(sid, vid)
 );
+
+CREATE TABLE Publishes (
+    pubid       integer         REFERENCES Publisher(pubid),
+    vid         integer         REFERENCES Version(vid),
+    PRIMARY KEY(pubid, vid)
+)
 
 -- Sadly, SQLite does not support ASSERTION statements
 --
