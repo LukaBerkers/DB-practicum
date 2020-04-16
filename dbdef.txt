@@ -127,7 +127,7 @@ CREATE TABLE Publishes (
     pubid       integer         REFERENCES Publisher(pubid),
     vid         integer         REFERENCES Version(vid),
     PRIMARY KEY(pubid, vid)
-)
+);
 
 -- Sadly, SQLite does not support ASSERTION statements
 --
@@ -142,3 +142,28 @@ CREATE TABLE Publishes (
 --         )
 --     )
 -- );
+
+INSERT INTO Game VALUES (0, 'Monopoly', 1933, 2, 8, 8, 4.36, NULL);
+INSERT INTO Game VALUES (1, 'Scrabble', 1948, 2, 4, 10, 6.28, NULL);
+INSERT INTO Game VALUES (2, 'Go', -2200, 2, 2, 8, 7.64, NULL);
+INSERT INTO Game VALUES (3, 'Chess', 1475, 2, 2, 6, 7.11, NULL);
+INSERT INTO Game VALUES (4, 'Battleship', 1931, 2, 2, 8, 4.62, NULL);
+INSERT INTO Game VALUES (5, 'Catan', 1995, 3, 4, 10, 7.17, NULL);
+INSERT INTO Game VALUES (6, 'The Werewolves of Miller''s Hollow', 2001, 8, 18, 10, 6.76, NULL);
+INSERT INTO Game VALUES (7, 'BANG!', 2002, 4, 7, 10, 6.52, NULL);
+INSERT INTO GAME VALUES (8, 'That''s Pretty Clever', 2018, 1, 4, 8, 7.66, NULL);
+INSERT INTO Organization VALUES (0, 'European Go Federation');
+INSERT INTO Organization VALUES (1, 'American Go Association');
+INSERT INTO Organization VALUES (2, 'Nederlandse Go Bond');
+INSERT INTO Organization VALUES (3, 'All India Chess Federation');
+INSERT INTO Organization VALUES (4, 'All India Chess Federation for the Blind');
+INSERT INTO Organization VALUES (5, 'Japan Chess Association');
+INSERT INTO Sport VALUES (2, 0);
+INSERT INTO Sport VALUES (2, 1);
+INSERT INTO Sport VALUES (2, 2);
+INSERT INTO Sport VALUES (3, 3);
+INSERT INTO Sport VALUES (3, 4);
+INSERT INTO Sport VALUES (3, 5);
+INSERT INTO Version VALUES (0, 'Ganz schön clever, 8);
+INSERT INTO OnlineSeller VALUES (0, 'Amazon', 'https://www.amazon.com/');
+INSERT INTO Sale VALUES (0, 0, 22.86);

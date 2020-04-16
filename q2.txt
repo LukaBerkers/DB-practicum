@@ -1,1 +1,8 @@
-In deze tijden van sociale isolatie heb ik door gebrek aan inkomen een goedkope manier nodig om mezelf te vermaken. Ik wil een lijstje van alle 1 persoonsspellen, waarbij geen enkel spel duurder is dan 10 euro.
+-- In deze tijden van sociale isolatie heb ik door gebrek aan inkomen een goedkope manier nodig om mezelf te vermaken. Ik wil een lijstje van alle 1 persoonsspellen, waarbij geen enkel spel duurder is dan 10 euro.
+
+SELECT * FROM Game WHERE
+   minplayers = 1 AND
+   gid IN (
+   SELECT gid FROM Version WHERE
+   vid IN (
+   SELECT vid FROM Sale WHERE price =< 10));
