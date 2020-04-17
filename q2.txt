@@ -1,5 +1,5 @@
--- Mijn familie raakt altijd erg competatief wanneer we gewoon  rustig een spelletje willen spelen.
--- Ik wil de spellen (niet uitbreidingen) waarvan geen enkele competatieve organisatie is.
+-- Mijn familie raakt altijd erg competatief wanneer we gewoon rustig een spelletje willen spelen.
+-- Ik wil de spellen (niet uitbreidingen) waarvoor geen enkele competatieve organisatie bestaat.
 
 SELECT gid, gname FROM Game
 WHERE expands IS NULL
