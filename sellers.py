@@ -26,7 +26,7 @@ OFFLINE_SELLERS = {
 
 def add_statement(statement):
     with open(OUT_FILE, "a") as out_file:
-        out_file.write(statement)
+        out_file.write(statement + "\n")
 
 
 def add_sellers():
