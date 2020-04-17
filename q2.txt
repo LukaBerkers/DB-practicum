@@ -4,5 +4,5 @@
 SELECT gid, gname FROM Game
 WHERE expands IS NULL
 AND gid NOT IN (
-	SELECT gid FROM Sport
+    SELECT gid FROM Sport
 );
