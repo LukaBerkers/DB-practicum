@@ -1,7 +1,7 @@
 -- Mijn familie raakt altijd erg competatief wanneer we gewoon  rustig een spelletje willen spelen.
 -- Ik wil de spellen (niet uitbreidingen) waarvan geen enkele competatieve organisatie is.
 
-SELECT gname FROM Game
+SELECT gid, gname FROM Game
 WHERE expands IS NULL
 AND gid NOT IN (
 	SELECT gid FROM Sport
