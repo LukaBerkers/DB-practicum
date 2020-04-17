@@ -1,0 +1,8 @@
+-- Ik wil een overzicht van alle competatieve organisaties en de spellen waarvoor zij wedstrijden organiseren
+
+SELECT Organization.oid, oname, Game.gid, gname
+FROM Organization
+LEFT OUTER JOIN Sport
+ON Organization.oid = Sport.oid
+LEFT OUTER JOIN Game
+ON Sport.gid = Game.gid;
