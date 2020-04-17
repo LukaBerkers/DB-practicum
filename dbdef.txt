@@ -85,13 +85,6 @@ BEGIN
     END;
 END;
 
--- CREATE TABLE Patent (
---     gid         integer         REFERENCES Game(gid),
---     phid        integer         NOT NULL REFERENCES PatentHolder(phid),
---     country     text,
---     PRIMARY KEY(country, gid)
--- );
-
 CREATE TABLE Sport (
     gid         integer         REFERENCES Game(gid),
     oid         integer         REFERENCES Organization(oid),
