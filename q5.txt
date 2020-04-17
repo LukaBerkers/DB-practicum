@@ -1,5 +1,3 @@
--- Ik zoek een Nederlands spel met de hoogste rating.
+-- Je wil de kosten van localisatie van bordspellen berekenen en kijkt hiervoor naar alle spellen die zowel in het Nederlands als in het Duits zijn uitgebracht. Je sommeert hiervoor de prijzen van Nederlandstalige en Duitstalige spellen en neemt het maximum om een idee te krijgen van de kosten.
 
-SELECT * FROM Game HAVING rating >= ALL (SELECT * FROM Game WHERE gid IN (SELECT vof FROM Version WHERE vid IN (SELECT vid FROM InLanguage WHERE langcode = 1)));
-
--- Doesn't yet work...
+SELECT langcode, MAX(som) FROM (SELECT langcode, SUM(T.minprice) som FROM (SELECT I.langcode,MIN(price) minprice FROM Sale NATURAL JOIN Version INNER JOIN (SELECT * FROM Game WHERE gid IN (SELECT gid FROM Game G, Version V, InLanguage I WHERE G.gid = V.vof AND V.vid = I.vid AND I.langcode = 'dut') AND gid IN (SELECT gid FROM Game G, Version V, InLanguage I WHERE G.gid = V.vof AND V.vid = I.vid AND I.langcode = 'ger')) ON vof = gid NATURAL JOIN InLanguage I WHERE I.langcode = 'ger' GROUP BY gid) AS T UNION SELECT langcode, SUM(T.minprice) som FROM (SELECT I.langcode,MIN(price) minprice FROM Sale NATURAL JOIN Version INNER JOIN (SELECT * FROM Game WHERE gid IN (SELECT gid FROM Game G, Version V, InLanguage I WHERE G.gid = V.vof AND V.vid = I.vid AND I.langcode = 'dut') AND gid IN (SELECT gid FROM Game G, Version V, InLanguage I WHERE G.gid = V.vof AND V.vid = I.vid AND I.langcode = 'ger')) ON vof = gid NATURAL JOIN InLanguage I WHERE I.langcode = 'dut' GROUP BY gid) AS T);

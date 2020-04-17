@@ -1,15 +1,3 @@
--- Ik ben niet het type persoon die half werk levert, dus ik zoek een winkel die een spel en alle expansions van dat spel verkoopt.
+-- Ik ben niet het type persoon die half werk levert, dus ik zoek een onlinewinkel die Azule (gid = 12) en alle expansions van dat spel verkoopt.
 
- SELECT * FROM OnlineSeller WHERE sid IN (SELECT sid FROM Sale WHERE vid IN (SELECT vid FROM Version WHERE vof = 5));
-
-SELECT sname FROM OnlineSeller O
-WHERE NOT EXIST (
-  SELECT * FROM Version V, Sale S
-  WHERE S.vid = V.vid AND O.sid = S.sid
-  AND v.gid NOT IN (
-    SELECT G.gid FROM Game G
-    WHERE expands = 5 OR gid = 5));
-
-SELECT sname FROM OnlineSeller O WHERE NOT EXIST (SELECT * FROM Version V, Sale S WHERE S.vid = V.vid AND v.gid NOT IN (SELECT G.gid FROM Game G WHERE expands = 5 OR gid = 5));
-
-(SELECT sname, gid FROM OnlineSeller O, Sale S, Version V, Game G WHERE O.sid = S.sid AND S.vid = V.vid AND V.vof = G.gid) DIVISION (SELECT gid FROM Game WHERE expand = 5 OR gid = 5);
+SELECT sname FROM (SELECT sname, gid FROM OnlineSeller O, Sale S, Version V, Game G WHERE O.sid = S.sid AND S.vid = V.vid AND V.vof = G.gid) as sx WHERE NOT EXISTS (SELECT p.gid FROM (SELECT gid FROM Game WHERE expands = 12 OR gid = 12) as p EXCEPT SELECT sp.gid FROM (SELECT sname, gid FROM OnlineSeller O, Sale S, Version V, Game G WHERE O.sid = S.sid AND S.vid = V.vid AND V.vof = G.gid) as sp WHERE sp.sname = sx.sname) GROUP BY sname;
