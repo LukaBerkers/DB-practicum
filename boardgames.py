@@ -4,6 +4,7 @@ import random
 import requests
 import sys
 import time
+from tqdm import tqdm
 import xml.etree.ElementTree as ET
 
 random.seed()
@@ -19,6 +20,14 @@ DESIGNER_GAMES = dict()
 ARTIST_NAMES = dict()
 ARTIST_GAMES = dict()
 LANGUAGES = dict()
+PROCESSED_IDS = set()
+# WAIT = 8
+PBAR = tqdm()
+
+
+def log(s):
+    with open("log", "a") as log_file:
+        log_file.write(s + "\n")
 
 
 def add_statement(statement):
@@ -27,14 +36,24 @@ def add_statement(statement):
 
 
 def add_game_data(item_id, expands):
-    url = API + "thing?id=" + str(item_id) + "&stats=1&versions=1"
-    # time.sleep(.1)
-    print("Requesting: " + url)
-    data = requests.get(url)
-    item = ET.fromstring(data.content)[0]
+    if int(item_id) in PROCESSED_IDS:
+        return
+    else:
+        PROCESSED_IDS.add(int(item_id))
 
-    if item.find("minplayers").attrib["value"] == "0":
-        return  # Not a game
+    url = API + "thing?id=" + item_id + "&stats=1&versions=1"
+    global WAIT
+    time.sleep(2)
+    log("Requesting: " + url)
+    data = requests.get(url)
+    log(str(data))
+    while data.status_code == 429:
+        time.sleep(32)
+        # WAIT *= 2
+        log("Requesting: " + url)
+        data = requests.get(url)
+        log(str(data))
+    item = ET.fromstring(data.content)[0]
 
     global GID
     gid = GID
@@ -50,11 +69,18 @@ def add_game_data(item_id, expands):
         "expands": str(expands) if expands else "NULL",
     }
 
+    all_versions = item.findall("./versions/item[@type='boardgameversion']")
+
+    if game["minplayers"] == "0" or not all_versions:
+        return  # Not a game or no version exists
+    if game["maxplayers"] == "0":
+        game["maxplayers"] = "NULL"
+
     add_statement(
         "INSERT INTO Game VALUES ("
         + game["gid"]
         + ", '"
-        + game["name"]
+        + game["name"].replace("'", "''")
         + "', "
         + game["year"]
         + ", "
@@ -72,7 +98,6 @@ def add_game_data(item_id, expands):
     GID += 1
 
     global VID
-    all_versions = item.findall("./versions/item[@type='boardgameversion']")
     k = random.randint(0, len(all_versions) - 1)
     versions = [all_versions[0]] + random.sample(all_versions[1:], k)
     for version in versions:
@@ -81,7 +106,7 @@ def add_game_data(item_id, expands):
             "INSERT INTO Version VALUES ("
             + str(VID)
             + ", '"
-            + name
+            + name.replace("'", "''")
             + "', "
             + str(gid)
             + ");"
@@ -126,22 +151,32 @@ def add_game_data(item_id, expands):
             ARTIST_GAMES[id].append(gid)
 
     all_expansions = item.findall("./link[@type='boardgameexpansion']")
-    k = random.randint(0, len(all_expansions))
-    expansions = random.sample(all_expansions, k)
     inbound = item.findall("./link[@type='boardgameexpansion'][@inbound]")
+    real_expansions = set(all_expansions) - set(inbound)
+    k = random.randint(0, len(real_expansions))
+    expansions = random.sample(real_expansions, k)
+    PBAR.total += len(expansions)
+    PBAR.update(0)
     for expansion in expansions:
-        if expansion not in inbound:
-            add_game_data(expansion.attrib["id"], gid)
+        add_game_data(expansion.attrib["id"], gid)
+        PBAR.update(1)
 
 
 def main():
+    PBAR.total = len(sys.argv[1:])
+    PBAR.update(0)
     for arg in sys.argv[1:]:
         add_game_data(arg, None)
+        PBAR.update(1)
 
     pubid = 1
     for id, name in PUBLISHER_NAMES.items():
         add_statement(
-            "INSERT INTO Publisher VALUES (" + str(pubid) + ", '" + name + "');"
+            "INSERT INTO Publisher VALUES ("
+            + str(pubid)
+            + ", '"
+            + name.replace("'", "''")
+            + "');"
         )
         for version in PUBLISHER_VERSIONS[id]:
             add_statement(
