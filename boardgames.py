@@ -43,7 +43,7 @@ def add_game_data(item_id, expands):
 
     url = API + "thing?id=" + item_id + "&stats=1&versions=1"
     global WAIT
-    time.sleep(1)
+    time.sleep(2)
     log("Requesting: " + url)
     data = requests.get(url)
     log(str(data))
