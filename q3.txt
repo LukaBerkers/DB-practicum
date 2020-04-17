@@ -1,4 +1,5 @@
--- Alle uitgevers die uitsluitend spellen in het Nederlands gepubliceerd hebben.
+-- Ik wil de Nederlandse spellen industrie steunen, vanwege een misplaatste trots in mijn nationale identiteit.
+-- Ik wil alle uitgevers die uitsluitend spellen in het Nederlands gepubliceerd hebben, op een lijstje, zodat dit mijn koopgedrag kan beïnvloeden.
 
 SELECT pubid, pname FROM Publisher
 WHERE pubid NOT IN (
