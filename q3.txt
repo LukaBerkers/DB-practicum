@@ -1,1 +1,5 @@
 -- Spellen die uisluitend in het Nederlands gepubliceerd zijn
+
+SELECT * FROM Game WHERE gid NOT IN (SELECT vof FROM Version WHERE vid IN (SELECT vid FROM InLanguage WHERE langcode <> 1));
+
+-- Deze query werkt in principe, maar het neemt ook spellen mee die geen versies hebben of geen talen.

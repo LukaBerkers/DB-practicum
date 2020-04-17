@@ -1,1 +1,5 @@
-Ik zoek het strategiespel met de hoogste rating.
+-- Ik zoek een Nederlands spel met de hoogste rating.
+
+SELECT * FROM Game HAVING rating >= ALL (SELECT * FROM Game WHERE gid IN (SELECT vof FROM Version WHERE vid IN (SELECT vid FROM InLanguage WHERE langcode = 1)));
+
+-- Doesn't yet work...
