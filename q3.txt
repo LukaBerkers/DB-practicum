@@ -3,9 +3,9 @@
 
 SELECT pubid, pname FROM Publisher
 WHERE pubid NOT IN (
-	SELECT pubid
-	FROM Publishes
-	NATURAL JOIN Version
-	NATURAL JOIN InLanguage
-	WHERE langcode <> 'dut'
+    SELECT pubid
+    FROM Publishes
+    NATURAL JOIN Version
+    NATURAL JOIN InLanguage
+    WHERE langcode <> 'dut'
 );

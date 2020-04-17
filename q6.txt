@@ -1,0 +1,22 @@
+-- De persoon met de op één na hoogste gemediddelde beoordeling van de spellen (niet expansions) waar ze aan hebben gewerkt 
+
+SELECT perid, hname, MAX(average)
+FROM (
+    SELECT perid, hname, AVG(rating) average
+    FROM Game
+    NATURAL JOIN Job
+    NATURAL JOIN Person
+    WHERE expands IS NULL
+    GROUP BY perid
+)
+WHERE average <> (
+    SELECT MAX(allaverage)
+    FROM (
+        SELECT AVG(rating) allaverage
+        FROM Game
+        NATURAL JOIN Job
+        NATURAL JOIN Person
+        WHERE expands IS NULL
+        GROUP BY perid
+    )
+);
