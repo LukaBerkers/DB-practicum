@@ -3,7 +3,7 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE Game (
     gid         integer         PRIMARY KEY,
     gname       text            NOT NULL,
-    year        integer         NOT NULL,
+    year        integer,
     minplayers  integer         NOT NULL CHECK(minplayers > 0),
     maxplayers  integer         CHECK(maxplayers >= minplayers),
     minage      integer         NOT NULL CHECK(minage >= 0),
@@ -15,12 +15,7 @@ CREATE TABLE Version (
     vid         integer         PRIMARY KEY,
     vname       text            NOT NULL,
     vof         integer         NOT NULL REFERENCES Game(gid)
-);    
-
--- CREATE TABLE PatentHolder (
---     phid        integer         PRIMARY KEY,
---     phname      text            NOT NULL
--- );
+);
 
 CREATE TABLE Organization (
     oid         integer         PRIMARY KEY,
